@@ -1,13 +1,14 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import PlayScreen from './PlayScreen';
-import EditDeck from './EditDeck';
+import AddQuestion from './AddQuestion';
 import PropTypes from 'prop-types';
 import {FontAwesome5} from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-export const DeckView = ({route}) => {
+export const DeckView = ({route, navigation}) => {
+  navigation.setOptions({headerTitle: route.params.title});
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -22,8 +23,8 @@ export const DeckView = ({route}) => {
         }}
       />
       <Tab.Screen
-        name='Edit'
-        component={EditDeck}
+        name='Add card'
+        component={AddQuestion}
         initialParams={route.params}
         options={{
           // eslint-disable-next-line react/display-name, react/prop-types
@@ -38,6 +39,10 @@ export const DeckView = ({route}) => {
 
 DeckView.propTypes = {
   route: PropTypes.shape({
-    params: PropTypes.object.isRequired
-  }).isRequired
+    params: PropTypes.shape({
+      title: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+
+  navigation: PropTypes.shape({setOptions: PropTypes.func.isRequired})
 };

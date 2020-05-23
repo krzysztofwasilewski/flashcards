@@ -24,7 +24,7 @@ const style = StyleSheet.create({
   }
 });
 
-export const DeckCover = ({title, questionNum, id}) => {
+const DeckCover = ({title, questionNum, id}) => {
   const navigation = useNavigation();
 
   return (
@@ -33,7 +33,7 @@ export const DeckCover = ({title, questionNum, id}) => {
       activeOpacity={0.85}
       style={{width: '40%', margin: 5}}
       onPress={() => {
-        navigation.navigate('Deck', {id});
+        navigation.navigate('Deck', {id, title});
       }}
     >
       <View style={style.root}>
@@ -49,3 +49,5 @@ DeckCover.propTypes = {
   questionNum: PropTypes.number,
   id: PropTypes.string
 };
+
+export default DeckCover;

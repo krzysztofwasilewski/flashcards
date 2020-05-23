@@ -1,8 +1,25 @@
-export const ADD_QUESTION = 'ADD_QUESTION'
+import randomId from '../utils/randomId'
 
-export function addQuestion(question) {
+export const ADD_QUESTION = 'ADD_QUESTION'
+export const ADD_DECK = 'ADD_DECK'
+
+
+export function addQuestion(id, question) {
     return {
         type: ADD_QUESTION,
-        question
+        question,
+        id
+    }
+}
+
+
+export function addDeck(deck) {
+    return {
+        type: ADD_DECK,
+        deck: {
+            ...deck,
+            deck: [],
+            id: deck.id || randomId(20)
+        }
     }
 }

@@ -1,55 +1,46 @@
 import React from 'react';
-import {StatusBar, SafeAreaView, FlatList} from 'react-native';
+import {StatusBar, SafeAreaView, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {enableScreens} from 'react-native-screens';
-import {createStore, combineReducers} from 'redux';
-import {Provider, connect} from 'react-redux';
-import decks from './reducers/decks';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 import exampleDecks from './utils/examples';
-import {DeckCover} from './components/DeckCover';
 import {DeckView} from './components/DeckView';
-import PropTypes from 'prop-types';
+import DeckPreview from './components/DeckPreview';
+import NewDeck from './components/NewDeck';
+import reducers from './reducers';
+import middleware from './middleware';
 
 enableScreens();
 const Stack = createStackNavigator();
 
-const store = createStore(combineReducers({decks}), {decks: exampleDecks});
-
-const mapStateToProps = ({decks}) => ({
-  decks: Object.values(decks)
-});
-
-const DeckPreview = ({decks}) => (
-  <FlatList
-    renderItem={({item: {id, title, deck}}) => {
-      return <DeckCover id={id} title={title} questionNum={deck.length} />;
-    }}
-    data={decks}
-    keyExtractor={({id}) => id}
-  />
-);
-
-const DeckPreviewWrapper = connect(mapStateToProps)(DeckPreview);
-DeckPreview.propTypes = {
-  decks: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      deck: PropTypes.array.isRequired
-    })
-  )
-};
+const store = createStore(reducers, {decks: exampleDecks}, middleware);
 
 export default function App() {
   return (
     <Provider store={store}>
-      <StatusBar barStyle='dark-content' />
+      <StatusBar barStyle='dark-content' backgroundColor='white' />
       <SafeAreaView style={{flex: 1}}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen name='Home' component={DeckPreviewWrapper} />
+            <Stack.Screen
+              name='Home'
+              component={DeckPreview}
+              options={({navigation}) => ({
+                // eslint-disable-next-line react/display-name, react/prop-types
+                headerRight: ({tintColor}) => (
+                  <Button
+                    title='New deck'
+                    color={tintColor}
+                    onPress={() => navigation.navigate('New deck')}
+                  />
+                ),
+                headerRightContainerStyle: {paddingHorizontal: 10}
+              })}
+            />
             <Stack.Screen name='Deck' component={DeckView} />
+            <Stack.Screen name='New deck' component={NewDeck} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
