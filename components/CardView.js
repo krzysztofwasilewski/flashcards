@@ -1,7 +1,11 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Button, Text, Animated, Platform} from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect
+} from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import {correctAnswer, wrongAnswer, resetScore} from '../actions/currentGame';
 
@@ -54,15 +58,15 @@ const CardView = ({
       }).start(),
     [animatedRef]
   );
-
-  useEffect(() => {
+  const resetScreen = useCallback(() => {
     setResult('');
     setDisclosed(false);
     animatedRef.setValue(0);
     if (!questionId) {
       resetScore();
     }
-  }, [id, questionId]); // The deck ID together with the question index are effectively our compound key. we are reseeting the view when they change which indicates that the user started answering a new question.
+  }, [id, questionId]);
+  useFocusEffect(resetScreen); // The deck ID together with the question index are effectively our compound key. we are reseeting the view when they change which indicates that the user started answering a new question.
 
   const handleNextOrFinish = () => {
     result === 'correct' ? correctAnswer() : wrongAnswer();

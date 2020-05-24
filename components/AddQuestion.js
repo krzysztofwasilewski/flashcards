@@ -33,6 +33,7 @@ const AddQuestion = ({
   }
 }) => {
   const firstInputRef = useRef(null);
+  const secondInputRef = useRef(null);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const notificationOpacityRef = useRef(new Animated.Value(0)).current;
@@ -90,6 +91,10 @@ const AddQuestion = ({
         placeholder='eg. function to return a list of all property keys'
         autoFocus
         ref={firstInputRef}
+        returnKeyType={'next'}
+        onSubmitEditing={() =>
+          secondInputRef.current && secondInputRef.current.focus()
+        }
       />
       <Text style={style.label}>Answer:</Text>
       <TextInput
@@ -98,6 +103,9 @@ const AddQuestion = ({
         value={answer}
         onChangeText={setAnswer}
         placeholder='eg. Object.keys()'
+        ref={secondInputRef}
+        returnKeyType={'done'}
+        onSubmitEditing={() => question.trim() && answer.trim() && handleAdd()}
       />
       <Button
         title='Submit'

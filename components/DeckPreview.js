@@ -15,6 +15,7 @@ const DeckPreview = ({decks}) => {
   useScrollToTop(listRef);
   return (
     <FlatList
+      contentContainerStyle={{alignItems: 'stretch'}}
       ref={listRef}
       renderItem={({item: {id, title, deck}}) => {
         return <DeckCover id={id} title={title} questionNum={deck.length} />;

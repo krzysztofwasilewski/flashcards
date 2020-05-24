@@ -31,7 +31,7 @@ const DeckCover = ({title, questionNum, id}) => {
     <TouchableHighlight
       underlayColor='black'
       activeOpacity={0.85}
-      style={{width: '40%', margin: 5}}
+      style={{width: '40%', margin: 10}}
       onPress={() => {
         navigation.navigate('Deck', {id, title});
       }}

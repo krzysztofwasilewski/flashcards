@@ -39,6 +39,8 @@ const NewDeck = ({addDeck, navigation}) => {
         placeholder='What this quiz is about'
         onChangeText={setTitle}
         autoFocus
+        onSubmitEditing={() => title.trim() && handleSaveTitle()}
+        returnKeyType='done'
       />
       <Button
         title='Create Deck'

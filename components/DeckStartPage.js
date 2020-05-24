@@ -29,7 +29,9 @@ const DeckStartPage = ({
         title='Start a Quiz'
       />
       {!numQuestions && (
-        <Text>You can’t play an empty quiz. Add questions.</Text>
+        <Text style={{textAlign: 'center'}}>
+          You can’t play an empty quiz. Add questions.
+        </Text>
       )}
     </View>
   );
