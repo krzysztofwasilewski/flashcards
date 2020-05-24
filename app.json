@@ -7,6 +7,10 @@
     "version": "1.0.0",
     "platforms": ["ios", "android", "web"],
     "assetBundlePatterns": ["**/*"],
-    "icon": "./icon.png"
+    "icon": "./icon.png",
+    "android": {
+      "package": "com.krzysztofwasilewski.flashcards",
+      "versionCode": 1
+    }
   }
 }
