@@ -5,7 +5,7 @@ export default {
         deck: [
             {
                 question: 'What does the spread operator look like?',
-                answer: '...'
+                answer: 'Like this: ...'
             },
             {
                 question: 'A function to iterate over an array and returning another array, one new element for each existing one',
