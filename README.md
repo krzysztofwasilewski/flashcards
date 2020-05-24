@@ -16,7 +16,7 @@ Once you select a tile, you will be presented with the deck view. The view has t
 
 ### The game play
 
-Once you start a game, the app will show you the cards one by one. When a card is presented, it shows the question and you need to think what the correct answer is. Once you’ve decided, press the Show Answer button and the correct answer will be revealed. Now press either Correct or Incorrect button, depending if you answered correctly or not. I'm counting on your clear conscience here. Press the Next when you decide your answer with finality. Once you reach the end of the deck, we will show your score. If you’re happy, you can go back to Home and select a different deck, and if you’re not, you can Play Again. Tapping Back to Deck takes you to the front page of the current deck.
+Once you start a game, the app will show you the cards one by one. When a card is presented, it shows the question and you need to think what the correct answer is. Once you’ve decided, press the Show Answer button and the correct answer will be revealed. Now press either Correct or Incorrect button, depending if you answered correctly or not. I’m counting on your clear conscience here. Press the Next when you decide your answer with finality. Once you reach the end of the deck, we will show your score. If you’re happy, you can go back to Home and select a different deck, and if you’re not, you can Play Again. Tapping Back to Deck takes you to the front page of the current deck.
 
 ## Set-up
 
