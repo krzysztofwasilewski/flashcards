@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 const style = StyleSheet.create({
   root: {
     borderStyle: 'solid',
-    borderColor: '#ccc',
+    borderColor: 'lightpink',
     borderWidth: 1,
 
     height: 200,
     justifyContent: 'space-around',
-    backgroundColor: 'red'
+    backgroundColor: 'lavenderblush'
   },
   titleText: {
     textAlign: 'center',
@@ -29,7 +29,7 @@ const DeckCover = ({title, questionNum, id}) => {
 
   return (
     <TouchableHighlight
-      underlayColor='blue'
+      underlayColor='black'
       activeOpacity={0.85}
       style={{width: '40%', margin: 5}}
       onPress={() => {

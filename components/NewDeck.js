@@ -13,7 +13,9 @@ import {addDeck} from '../actions/questions';
 import randomId from '../utils/randomId';
 
 const style = StyleSheet.create({
-  root: {flex: 1, justifyContent: 'space-around'}
+  root: {flex: 1, justifyContent: 'flex-start'},
+  contentItem: {marginHorizontal: 10, marginVertical: 5},
+  input: {marginHorizontal: 20}
 });
 const NewDeck = ({addDeck, navigation}) => {
   const [title, setTitle] = useState('');
@@ -31,12 +33,18 @@ const NewDeck = ({addDeck, navigation}) => {
 
   return (
     <KeyboardAvoidingView style={style.root}>
-      <Text>Title</Text>
+      <Text style={style.contentItem}>Title:</Text>
       <TextInput
-        placeholder='What this quic is about'
+        style={[style.contentItem, style.input]}
+        placeholder='What this quiz is about'
         onChangeText={setTitle}
+        autoFocus
       />
-      <Button title='Save' disabled={!title.trim()} onPress={handleSaveTitle} />
+      <Button
+        title='Create Deck'
+        disabled={!title.trim()}
+        onPress={handleSaveTitle}
+      />
     </KeyboardAvoidingView>
   );
 };
@@ -44,7 +52,8 @@ const NewDeck = ({addDeck, navigation}) => {
 NewDeck.propTypes = {
   addDeck: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
+    navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired
   }).isRequired
 };
 const mapDispatchToProps = {

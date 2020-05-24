@@ -5,8 +5,11 @@ import {connect} from 'react-redux';
 
 const style = StyleSheet.create({
   root: {
-    flex: 1
-  }
+    flex: 1,
+    justifyContent: 'space-around'
+  },
+  text: {textAlign: 'center'},
+  title: {fontWeight: 'bold'}
 });
 const DeckStartPage = ({
   route: {
@@ -18,8 +21,8 @@ const DeckStartPage = ({
 }) => {
   return (
     <View style={style.root}>
-      <Text>{title}</Text>
-      <Text>{`Questions in the deck: ${numQuestions}`}</Text>
+      <Text style={[style.text, style.title]}>{title}</Text>
+      <Text style={style.text}>{`Questions in the deck: ${numQuestions}`}</Text>
       <Button
         onPress={() => navigation.navigate('card', {id, questionId: 0})}
         disabled={!numQuestions}

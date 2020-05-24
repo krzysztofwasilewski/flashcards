@@ -1,8 +1,25 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 // import {resetScore} from '../actions/currentGame';
+
+const style = StyleSheet.create({
+  root: {
+    flex: 1,
+    justifyContent: 'space-around'
+  },
+  textItem: {
+    marginVertical: 10,
+    textAlign: 'center'
+  },
+  result: {
+    fontWeight: 'bold'
+  },
+  correct: {color: 'green'},
+  wrong: {color: 'red'},
+  resultContainer: {justifyContent: 'center'}
+});
 
 const QuizSummary = ({
   correctAnswerNum,
@@ -11,19 +28,27 @@ const QuizSummary = ({
   navigation
   //   resetScore
 }) => (
-  <View>
-    <Text>Correct answers:</Text>
-    <Text>
-      {correctAnswerNum}/{totalNum}
-    </Text>
-    <Text>Wrong answers:</Text>
-    <Text>
-      {wrongAnswerNum}/{totalNum}
-    </Text>
+  <View style={style.root}>
+    <View style={style.resultContainer}>
+      <Text style={style.textItem}>Correct answers:</Text>
+      <Text style={[style.textItem, style.result, style.correct]}>
+        {correctAnswerNum}/{totalNum}
+      </Text>
+      <Text style={style.textItem}>Wrong answers:</Text>
+      <Text style={[style.textItem, style.result, style.wrong]}>
+        {wrongAnswerNum}/{totalNum}
+      </Text>
+    </View>
     <Button
       title='Restart Quiz'
       onPress={() => {
         navigation.navigate('card', {questionId: 0});
+      }}
+    />
+    <Button
+      title='Back to deck'
+      onPress={() => {
+        navigation.navigate('deckStart');
       }}
     />
   </View>

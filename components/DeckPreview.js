@@ -19,6 +19,7 @@ const DeckPreview = ({decks}) => {
       renderItem={({item: {id, title, deck}}) => {
         return <DeckCover id={id} title={title} questionNum={deck.length} />;
       }}
+      numColumns={2}
       data={decks}
       keyExtractor={({id}) => id}
       getItemLayout={(data, index) => ({
