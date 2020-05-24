@@ -1,8 +1,8 @@
-import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, Button, StyleSheet, Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-// import {resetScore} from '../actions/currentGame';
+import {scheduleLocalNotification} from '../utils/notifications';
 
 const style = StyleSheet.create({
   root: {
@@ -27,33 +27,37 @@ const QuizSummary = ({
   totalNum,
   navigation
   //   resetScore
-}) => (
-  <View style={style.root}>
-    <View style={style.resultContainer}>
-      <Text style={style.textItem}>Correct answers:</Text>
-      <Text style={[style.textItem, style.result, style.correct]}>
-        {correctAnswerNum}/{totalNum}
-      </Text>
-      <Text style={style.textItem}>Wrong answers:</Text>
-      <Text style={[style.textItem, style.result, style.wrong]}>
-        {wrongAnswerNum}/{totalNum}
-      </Text>
-    </View>
-    <Button
-      title='Restart Quiz'
-      onPress={() => {
-        navigation.navigate('card', {questionId: 0});
-      }}
-    />
-    <Button
-      title='Back to deck'
-      onPress={() => {
-        navigation.navigate('deckStart');
-      }}
-    />
-  </View>
-);
+}) => {
+  if (Platform.OS !== 'web')
+    useEffect(() => void scheduleLocalNotification(), []);
 
+  return (
+    <View style={style.root}>
+      <View style={style.resultContainer}>
+        <Text style={style.textItem}>Correct answers:</Text>
+        <Text style={[style.textItem, style.result, style.correct]}>
+          {correctAnswerNum}/{totalNum}
+        </Text>
+        <Text style={style.textItem}>Wrong answers:</Text>
+        <Text style={[style.textItem, style.result, style.wrong]}>
+          {wrongAnswerNum}/{totalNum}
+        </Text>
+      </View>
+      <Button
+        title='Restart Quiz'
+        onPress={() => {
+          navigation.navigate('card', {questionId: 0});
+        }}
+      />
+      <Button
+        title='Back to deck'
+        onPress={() => {
+          navigation.navigate('deckStart');
+        }}
+      />
+    </View>
+  );
+};
 QuizSummary.propTypes = {
   correctAnswerNum: PropTypes.number.isRequired,
   wrongAnswerNum: PropTypes.number.isRequired,
