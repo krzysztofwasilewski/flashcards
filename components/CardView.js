@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState, useRef, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Button, Text, Animated, Platform} from 'react-native';
 import {
